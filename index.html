@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Community Lost &amp; Found</title>
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    /* Navigation Styles */
+    nav {
+      background:rgba(2, 2, 99, 0.582);
+      padding: 0 15px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 60px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      color: aliceblue;
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      font-size: clamp(0.8rem,3vw,0.9rem);
+      white-space:nowrap ;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .nav-link.active {
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .nav-link::before {
+      font-size: 16px;
+    }
+
+    .nav-link[href="about.html"]::before {
+      content: "ℹ️";
+    }
+
+    .nav-link[href="contact.html"]::before {
+      content: "📧";
+    }
+
+    /* Logout Button Styles */
+    .logout-btn {
+      background: rgba(220, 53, 69, 0.8);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .logout-btn:hover {
+      background: rgba(220, 53, 69, 1);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+    }
+
+    .logout-btn::before {
+      content: "🚪";
+      font-size: 16px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: white;
+      font-size: 14px;
+    }
+
+    .user-email {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: column;
+        height: auto;
+        padding: 15px 0;
+        gap: 15px;
+      }
+
+      .nav-links {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .nav-link {
+        padding: 10px 15px;
+        font-size: 14px;
+      }
+
+      .logout-btn {
+        padding: 10px 15px;
+        font-size: 14px;
+      }
+
+      .user-info {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-link {
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+
+      .nav-link::before {
+        font-size: 14px;
+      }
+
+      .logout-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+
+      .user-email {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+    }
+
+    .list-item {
+      padding: 16px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      background: white;
+    }
+
+    .tag {
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+
+    .tag.lost { background: #ffebee; color: #c62828; }
+    .tag.found { background: #e8f5e8; color: #2e7d32; }
+
+    .no-items, .error {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+
+    .ghost {
+      background: transparent;
+      border: 1px solid #ddd;
+    }
+
+    .ghost:hover {
+      background: #f5f5f5;
+    }
+    .list-item {
+      padding: 16px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      background: white;
+      transition: all 0.3s ease;
+    }
+
+    .list-item:hover {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transform: translateY(-1px);
+    }
+
+    .tag {
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8em;
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    .tag.lost { 
+      background: #ffebee; 
+      color: #c62828; 
+    }
+
+    .tag.found { 
+      background: #e8f5e8; 
+      color: #2e7d32; 
+    }
+
+    .no-items, .error {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+      font-style: italic;
+    }
+
+    .ghost {
+      background: transparent;
+      border: 1px solid #ddd;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .ghost:hover {
+      background: #f5f5f5;
+    }
+
+    .muted {
+      color: #666;
+      font-size: 0.9em;
+    }
+
+    .error {
+      color: #d32f2f;
+      background: #ffebee;
+      padding: 12px;
+      border-radius: 4px;
+      border-left: 4px solid #d32f2f;
+    }
+  </style>
+  
+  <!-- Your existing meta tags and styles -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // Initialize Supabase globally
+    const supabaseUrl = 'https://bbtccnxitrnhvpxfyppf.supabase.co'
+    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJidGNjbnhpdHJuaHZweGZ5cHBmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI2Mjk2MzYsImV4cCI6MjA3ODIwNTYzNn0.G6KRDi_ArLsO-2drE_BVFKqA0B6s0dstpde0PyzaWBE'
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey)
+  </script>
+</head>
+<body> 
+  <header>
+    <div class="wrap">
+      <h1>Community Lost &amp; Found</h1>
+      <p class="lead">Report lost or found items, search listings, and help reunite people with their belongings.</p>
+    </div>
+  </header>
+  
+  <!-- UPDATED NAVIGATION WITH LOGOUT BUTTON -->
+  <nav>
+    <div class="nav-container">
+      <div class="nav-links">
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact .html" class="nav-link">Contact us</a>
+      </div>
+      
+      <div class="user-info" id="userInfo" style="display: none;">
+        <span class="user-email" id="userEmail"></span>
+        <button class="logout-btn" id="logoutBtn">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <div class="grid">
+      <section class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <strong id="countSummary">0 items</strong>
+            <div class="muted">Active listings in Server Database</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center" >
+            <button id="exportBtn" class="ghost">Export JSON</button>
+            <button id="clearBtn" class="ghost">Clear</button>
+          </div>
+        </div>
+
+        <hr style="margin:12px 0" />
+
+        <div class="tabs">
+          <button class="tab active" data-filter="all">All</button>
+          <button class="tab" data-filter="lost">Lost</button>
+          <button class="tab" data-filter="found">Found</button>
+          <button class="tab" data-filter="claimed">Claimed</button>
+        </div>
+
+        <div class="controls">
+          <input id="search" class="search" placeholder="Search by title, description, contact..." />
+          <select id="sort">
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+          </select>
+        </div>
+
+        <div id="list" class="list"></div>
+      </section>
+
+      <aside class="card">
+        <h3 style="margin-top:0">Report an item</h3>
+        <form id="itemForm">
+          <label>Type</label>
+          <select id="type">
+            <option value="lost">Lost</option>
+            <option value="found">Found</option>
+          </select>
+
+          <label>Title</label>
+          <input id="title" required placeholder="e.g. Black wallet with ID" />
+
+          <label>Description</label>
+          <textarea id="description" rows="4" placeholder="Where, when, distinguishing features"></textarea>
+
+          <div class="row">
+            <div style="flex:1">
+              <label>Date</label>
+              <input id="date" type="date" />
+            </div>
+            <div style="width:120px">
+              <label>Reward (optional)</label>
+              <input id="reward" placeholder="KSh" />
+            </div>
+          </div>
+
+          <label>Contact info</label>
+          <input id="contact" placeholder="phone or email" />
+
+          <label>Photo (optional)</label>
+          <input id="photo" type="file" accept="image/*" />
+          <div id="preview" style="margin:8px 0"></div>
+
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button id="submitBtn">Submit</button>
+            <button id="resetBtn" type="button" class="ghost">Reset</button>
+          </div>
+        </form>
+
+        <hr />
+      </aside>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+
+  <!-- Logout functionality -->
+  <script>
+    // Check authentication state and update UI
+    async function checkAuthState() {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        const userInfo = document.getElementById('userInfo');
+        const userEmail = document.getElementById('userEmail');
+
+        if (session && session.user) {
+          // User is logged in
+          userInfo.style.display = 'flex';
+          userEmail.textContent = session.user.email;
+        } else {
+          // User is not logged in, redirect to login
+          window.location.href = 'login.html';
+        }
+      } catch (error) {
+        console.error('Error checking auth state:', error);
+        window.location.href = 'login.html';
+      }
+    }
+
+    // Logout function
+    async function logout() {
+      try {
+        const { error } = await supabase.auth.signOut();
+        if (error) {
+          console.error('Error signing out:', error);
+          alert('Error signing out. Please try again.');
+          return;
+        }
+        
+        // Clear local storage
+        localStorage.removeItem('user');
+        localStorage.removeItem('session');
+        
+        // Redirect to login page
+        window.location.href = 'login.html';
+      } catch (error) {
+        console.error('Logout error:', error);
+        alert('Error signing out. Please try again.');
+      }
+    }
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check auth state when page loads
+      checkAuthState();
+
+      // Add logout button event listener
+      const logoutBtn = document.getElementById('logoutBtn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', logout);
+      }
+
+      // Listen for auth state changes
+      supabase.auth.onAuthStateChange((event, session) => {
+        if (event === 'SIGNED_OUT') {
+          window.location.href = 'login.html';
+        }
+      });
+    });
+
+    // Optional: Add auth check to form submission
+    document.addEventListener('DOMContentLoaded', function() {
+      const itemForm = document.getElementById('itemForm');
+      if (itemForm) {
+        itemForm.addEventListener('submit', async function(e) {
+          const { data: { session } } = await supabase.auth.getSession();
+          if (!session) {
+            e.preventDefault();
+            alert('Please log in to submit an item.');
+            window.location.href = 'login.html';
+          }
+        });
+      }
+    });
+  </script>
+  
+</body>
+</html>
