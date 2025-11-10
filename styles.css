@@ -1,0 +1,311 @@
+:root{--bg:#f6f8fbf3;--card:#ffffffb4;--accent:#0e31a5;--muted:#6b7280;--danger:#ef4444}
+    *{
+        box-sizing:border-box;
+        margin:0;
+        padding: 0;
+    }
+    body{
+        
+        background-image: url(Line-Based\ Visualization\ in\ Blue\ _\ USAP_store.jpeg);
+        background-size: cover;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
+        line-height: 1.6;
+        min-height: 100vh;
+        
+    
+
+
+    
+
+    }
+    header{
+background-color: #06135e;
+        color:rgb(197, 190, 190);
+        padding: 20px  0;
+    }
+    .wrap{
+       width: 100%;
+        max-width:1200px;
+        margin:0 auto;
+        padding:0 15px;
+    }
+    h1{
+        font-size: clamp(1.5rem, 4vw,2.5rem);
+        margin-bottom: 8px;
+        text-align: center;
+        
+    }
+    p.lead{
+        font-size: clamp(0.9rem,2.5vw,1.1rem);
+        text-align: center;
+        opacity: 0.9;
+        max-width: 600px;
+        margin: 0 auto;
+
+    }
+
+    .grid{
+        display:grid;
+        grid-template-columns: 1fr ;
+
+        
+        gap:20px;
+        
+    }
+    @media (min-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr 350px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .grid {
+        grid-template-columns: 1fr 400px;
+      }
+    }
+
+
+    .card{
+        background:var(--card);
+        border-radius:12px;padding:20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        background-color: #e6e9ee8f;
+        
+    }
+
+    form .row{
+        display:flex;
+        gap:10px;
+        flex-direction: column;
+    }
+     @media (min-width: 480px) {
+      .row {
+        flex-direction: row;
+      }
+    }
+    label{
+        font-size:14px;
+        font-weight: 600;
+        color:var(--muted);
+        display:block;
+        margin-bottom:4px;
+    }
+    input,select,textarea{
+        width:100%;
+        padding:12px;
+        border: 1px solid #ddd;
+        border-radius:6px;
+        font-size:14px;
+        font-family: inherit;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    button{
+        background:var(--accent);
+        color:rgba(109, 46, 46, 0.993);
+        border:0;
+        padding:12px 16px;
+        border-radius:6px;
+        cursor:pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        font-family: inherit;
+    }
+    button.ghost{
+        background:transparent;
+        color:var(--accent);
+        border:1px solid rgba(14,165,164,.12);
+    }
+    .tabs{
+        display: flex;
+      gap: 5px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+    .tab{
+        padding: 8px 16px;
+      border: #111;
+      
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: clamp(0.8rem, 3vw, 0.9rem);
+      transition: all 0.3s ease;
+      flex: 1;
+      min-width: 60px;
+      text-align: center;
+        color: #070707;
+    }
+    .tab.active{
+        background:rgba(14,165,164,.1);
+        border-color:rgba(14,165,164,.2);
+        color: black;
+    }
+
+    .list{
+        display:grid;
+        flex-direction: column;
+        gap:12px;
+    }
+    .item{
+         background: rgba(255, 255, 255, 0.596);
+  border-radius: 12px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+    
+        
+        
+    }
+    .thumb{
+        width:92px;
+        height:72px;
+        border-radius:8px;
+        background:#f3f4f6;display:flex;
+        align-items:center;
+        justify-content:center;
+        overflow:hidden;
+    }
+    .thumb img{
+        max-width:100%;
+        max-height:100%;
+        object-fit:cover;
+    }
+    .meta{
+        flex:1;
+    }
+    .meta h3{
+        margin:0;
+        font-size:1rem;
+    }
+    .meta p{
+        margin:6px 0;
+        color:var(--muted);
+        font-size:.9rem;
+    }
+    .meta .tags{
+        font-size:.78rem;
+        color:#0e25a5;
+    }
+    .actions{
+        display:flex;
+        flex-direction:column;
+        gap:8px;
+    }
+    .small{
+        font-size:.82rem;
+        padding:8px;
+        border-radius:8px;
+    }
+    .danger{
+        background:transparent;
+        color:var(--danger);
+        border:1px solid rgba(239,68,68,.08);
+    }
+
+    .controls{
+        display:flex;
+        gap:10px;
+        margin-bottom:15px;
+        align-items:center;
+        flex-direction: column;
+    }
+     @media (min-width: 480px) {
+      .controls {
+        flex-direction: row;
+      }
+    }
+    .search{
+        flex:1;
+        padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      min-width: 0;
+    }
+    .muted{
+        color:var(--muted);
+        font-size:.9rem;
+    
+    }
+
+    footer{
+        max-width:1100px;
+        margin:20px auto;
+        padding:8px 16px;
+        color:var(--muted);
+        text-align:center;
+    }
+
+    @media(max-width:900px){.grid{grid-template-columns:1fr}.thumb{width:76px;height:60px}}
+  /* Modal overlay */
+.active{
+    color: #cbced1;
+    align-self: last baseline;
+    
+}
+#home{
+    color: #c4c7ce;
+}
+ #sort {
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: white;
+      font-size: 14px;
+      min-width: 120px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 4px;
+      display: block;
+    }
+    @media (max-width: 767px) {
+      .nav-container {
+        padding: 10px 0;
+        gap: 10px;
+      }
+    }
+     .nav-links {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .user-section {
+        justify-content: center;
+        width: 100%;
+      }
+
+       .card {
+        padding: 15px;
+      }
+
+      .tabs {
+        gap: 4px;
+      }
+
+      .tab {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+     html, body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+    button, .nav-link, .tab {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    input, select, textarea {
+      font-size: 16px; /* Prevents zoom on iOS */
+    }
