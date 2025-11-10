@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Lost & Found</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url(Line-Based\ Visualization\ in\ Blue\ _\ USAP_store.jpeg);
+      background-size: cover;
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+      background-position: center;
+      background-attachment: fixed;
+
+    }
+
+    /* Header Styles */
+    header {
+      backdrop-filter: blur(15px);
+      color: white;
+      padding: clamp(20px, 5vw,40px) 0;
+      text-align: center;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clanp(10px, 3vw, 20px);
+      width: 100%;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 6vw, 2.5rem);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .lead {
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Navigation */
+    nav {
+      background: #05458fab;
+       padding: 0 clamp(10px, 3vw, 20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+       min-height: 60px;
+      flex-wrap: wrap;
+      gap: 10px
+    }
+
+    .nav-links {
+      display: flex;
+      gap: clamp(10px, 2vw, 30px);
+      flex-wrap: wrap;
+    }
+    .nav-logo {
+      color: white;
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      font-weight: bold;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+      font-size: clamp(0.8rem, 3vw, 1rem);
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-links a.active {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Main Content */
+    main {
+      padding: clamp(30px, 5vw, 60px) 0;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr ;
+      gap: clamp(20px, 4vw, 40px);
+      align-items: start;
+    }
+     @media (min-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.486);
+      padding: clamp(20px, 4vw, 40px);
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      width: 100%;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(20px, 3vw, 30px);
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .info-icon {
+      width: clamp(40px, 8vw, 50px);
+      height: clamp(40px, 8vw, 50px);
+      background-color: #667eea;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+       font-size: clamp(1rem, 3vw, 1.2rem);
+      flex-shrink: 0;
+    }
+
+    .info-content h3 {
+      margin-bottom: 5px;
+      color: #2c3e50;
+      font-size: clamp(1rem, 3vw, 1.1rem);
+    }
+
+    .info-content p {
+      color: #666;
+      margin-bottom: 5px;
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .social-link {
+       width: clamp(35px, 7vw, 40px);
+      height: clamp(35px, 7vw, 40px);
+      
+      background: #f8f9fa;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #667eea;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 2px solid #e9ecef;
+      font-size: clamp(0.8rem, 3vw, 1rem);
+    }
+
+    .social-link:hover {
+      background: #667eea;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: clamp(15px, 3vw, 20px);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #2c3e50;
+      font-weight: 500;
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: clamp(10px, 2.5vw, 12px) clamp(12px, 2.5vw, 16px);
+      border: 2px solid #e9ecef;
+      border-radius: 8px;
+      font-size: clamp(14px, 3vw, 15px);
+      transition: all 0.3s ease;
+      background: #f8f9fa;
+      font-family: inherit;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #667eea;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    textarea {
+      resize: vertical;
+       min-height: clamp(100px, 25vw, 120px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: clamp(12px, 3vw, 14px) clamp(20px, 4vw, 30px);
+      border-radius: 8px;
+      font-size: clamp(14px, 3vw, 16px);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+       min-height: 44px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    /* Alternative Contact Options */
+    .contact-options {
+      display: grid;
+      grid-template-columns: 1fr ;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    @media (min-width: 480px) {
+      .contact-options {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .contact-option {
+      background: rgba(255, 255, 255, 0.8);
+      padding: clamp(15px, 3vw, 20px);
+      border-radius: 8px;
+      text-align: center;
+      border: 2px solid #e9ecef;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      min-height: 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .contact-option:hover {
+      border-color: #667eea;
+      transform: translateY(-2px);
+    }
+
+    .contact-option h4 {
+      color: #2c3e50;
+      margin-bottom: 8px;
+      font-size: clamp(0.9rem, 3vw, 1rem);
+    }
+
+    .contact-option p {
+      color: #666;
+      font-size: clamp(0.75rem, 2.5vw, 0.85rem);
+    }
+
+    .copy-btn {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: clamp(0.75rem, 2.5vw, 0.85rem);
+      min-height: 36px;
+      transition: all 0.3s ease
+    }
+
+    .copy-btn:hover {
+      background: #218838;
+      transform: translateY(-1px);
+    }
+
+    /* Alert Messages */
+    .alert {
+      padding: clamp(12px, 3vw, 15px) clamp(15px, 3vw, 20px);
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+      animation: slideDown 0.3s ease;
+      font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+    }
+
+    .alert-success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .alert-error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .alert-info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+
+    .alert-warning {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeaa7;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    footer {
+      background: rgba(5, 69, 143, 0.8);
+      color: white;
+      text-align: center;
+      padding: clamp(20px, 4vw, 30px) 0;
+      margin-top: auto;
+    }
+
+    footer p {
+      margin-bottom: 8px;
+      font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+    }
+ @media (max-width: 767px) {
+      .nav-container {
+        flex-direction: column;
+        padding: 12px 0;
+        gap: 12px;
+      }
+
+      .nav-links {
+        justify-content: center;
+        width: 100%;
+      }
+      .info-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+      }
+
+      .info-icon {
+        align-self: center;
+      }
+    }
+     @media (max-width: 480px) {
+      .card {
+        padding: 15px;
+        border-radius: 8px;
+      }
+
+      .contact-options {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-option {
+        padding: 15px;
+      }
+       input, textarea, select {
+        padding: 10px 12px;
+      }
+
+      .btn-primary {
+        padding: 12px 20px;
+      }
+    }
+    /* Very small devices */
+    @media (max-width: 360px) {
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+      }
+       .social-links {
+        justify-content: center;
+      }
+    }
+
+    /* Touch-friendly improvements */
+    button, .nav-links a, .contact-option, .social-link {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    input, select, textarea {
+      font-size: 16px; /* Prevents zoom on iOS */
+    }
+
+    /* Prevent horizontal scroll */
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    /* Ensure full height layout */
+     body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+    }
+    
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="wrap">
+      <h1>Contact Us</h1>
+      <p class="lead">Get in touch with our team. We're here to help you with any questions about our Lost & Found service.</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <div class="nav-logo">
+        <strong style="color: white; font-size: 1.2rem;">Lost & Found</strong>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="active">Contact</a>
+        <a href="login.html">Login</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="wrap">
+    <div class="contact-grid">
+      <!-- Contact Information -->
+      <div class="card contact-info">
+        <h2 style="color: #2c3e50; margin-bottom: 30px;">Get In Touch</h2>
+        
+        <div class="info-item">
+          <div class="info-icon">📍</div>
+          <div class="info-content">
+            <h3>Visit Us</h3>
+            <p>123 Community Street</p>
+            <p>Nairobi, Kenya 00100</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">📞</div>
+          <div class="info-content">
+            <h3>Call Us</h3>
+            <p>+254 700 123 456</p>
+            <p>Mon - Fri, 8:00 AM - 6:00 PM</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">✉️</div>
+          <div class="info-content">
+            <h3>Email Us</h3>
+            <p id="email-display">musaliasydney17@gmail.com</p>
+            <p>We respond within 24 hours</p>
+            <button class="copy-btn" onclick="copyEmail()">📋 Copy Email</button>
+          </div>
+        </div>
+
+        <!-- Alternative Contact Options -->
+        <div style="margin-top: 30px;">
+          <h3 style="color: #2c3e50; margin-bottom: 15px;">Alternative Contact Methods</h3>
+          <div class="contact-options">
+            <div class="contact-option" onclick="openGmail()">
+              <h4>📧 Gmail</h4>
+              <p>Open in Gmail (web)</p>
+            </div>
+            <div class="contact-option" onclick="openOutlook()">
+              <h4>📧 Outlook</h4>
+              <p>Open in Outlook (web)</p>
+            </div>
+            <div class="contact-option" onclick="copyEmailTemplate()">
+              <h4>📋 Copy Template</h4>
+              <p>Copy email template</p>
+            </div>
+            <div class="contact-option" onclick="showManualEmailInstructions()">
+              <h4>ℹ️ Manual Email</h4>
+              <p>Email instructions</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="card">
+        <h2 style="color: #2c3e50; margin-bottom: 30px;">Send us a Message</h2>
+        <div id="formAlerts"></div>
+        
+        <div class="alert alert-info">
+          <strong>Note:</strong> This will try to open your email client. If it doesn't work, use the alternative methods on the left.
+        </div>
+
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" required placeholder="Enter your full name">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Your Email *</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email address">
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject *</label>
+            <select id="subject" name="subject" required>
+              <option value="">Select a subject</option>
+              <option value="General Inquiry">General Inquiry</option>
+              <option value="Technical Support">Technical Support</option>
+              <option value="Lost Item Report">Lost Item Report</option>
+              <option value="Found Item Report">Found Item Report</option>
+              <option value="Feature Request">Feature Request</option>
+              <option value="Partnership">Partnership</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" required placeholder="Tell us how we can help you..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary" id="submitBtn">
+            Send Message via Email
+          </button>
+        </form>
+
+        <div style="text-align: center; margin-top: 15px;">
+          <p style="color: #666; font-size: 14px;">
+            If email doesn't open automatically, please use one of the alternative methods.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">
+      <p>&copy; 2024 Lost & Found Community. All rights reserved.</p>
+      <p style="margin-top: 10px; opacity: 0.8;">Helping reunite people with their belongings since 2024</p>
+    </div>
+  </footer>
+
+  <script>
+    // Contact Form Handling with Multiple Fallbacks
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value.trim();
+      const userEmail = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value.trim();
+
+      // Basic validation
+      if (!validateForm(name, userEmail, subject, message)) {
+        return;
+      }
+
+      // Try multiple email methods
+      attemptEmailSend(name, userEmail, subject, message);
+    });
+
+    function validateForm(name, email, subject, message) {
+      if (!name || !email || !subject || !message) {
+        showAlert('Please fill in all required fields.', 'error');
+        return false;
+      }
+
+      if (!isValidEmail(email)) {
+        showAlert('Please enter a valid email address.', 'error');
+        return false;
+      }
+
+      if (message.length < 10) {
+        showAlert('Please provide a more detailed message (at least 10 characters).', 'error');
+        return false;
+      }
+
+      return true;
+    }
+
+    function attemptEmailSend(name, userEmail, subject, message) {
+      const emailBody = createEmailBody(name, userEmail, subject, message);
+      
+      // Method 1: Try standard mailto
+      showAlert('Attempting to open email client...', 'info');
+      
+      const mailtoLink = `mailto:musaliasydney17@gmail.com?subject=${encodeURIComponent('Lost & Found: ' + subject)}&body=${encodeURIComponent(emailBody)}`;
+      
+      // Open mailto link
+      window.location.href = mailtoLink;
+      
+      // Check if mailto worked (basic detection)
+      setTimeout(() => {
+        showAlert('If email client didn\'t open, please use the alternative methods on the left.', 'warning');
+        
+        // Also copy to clipboard as backup
+        copyToClipboard(emailBody);
+        
+        // Reset form
+        document.getElementById('contactForm').reset();
+      }, 2000);
+    }
+
+    function createEmailBody(name, userEmail, subject, message) {
+      return `
+Name: ${name}
+Email: ${userEmail}
+Subject: ${subject}
+
+Message:
+${message}
+
+---
+Sent from Lost & Found Contact Form
+      `.trim();
+    }
+
+    // Alternative Contact Methods
+    function openGmail() {
+      const gmailLink = 'https://mail.google.com/mail/?view=cm&fs=1&to=musaliasydney17@gmail.com&su=Lost%20and%20Found%20Inquiry';
+      window.open(gmailLink, '_blank');
+      showAlert('Opening Gmail in new tab...', 'info');
+    }
+
+    function openOutlook() {
+      const outlookLink = 'https://outlook.live.com/mail/0/deeplink/compose?to=musaliasydney17@gmail.com&subject=Lost%20and%20Found%20Inquiry';
+      window.open(outlookLink, '_blank');
+      showAlert('Opening Outlook in new tab...', 'info');
+    }
+
+    function copyEmail() {
+      copyToClipboard('musaliasydney17@gmail.com');
+      showAlert('Email address copied to clipboard!', 'success');
+    }
+
+    function copyEmailTemplate() {
+      const template = `
+To: musaliasydney17@gmail.com
+Subject: Lost and Found Inquiry
+
+Dear Lost and Found Team,
+
+I would like to get in touch about:
+
+[Please describe your inquiry here]
+
+Best regards,
+[Your Name]
+      `.trim();
+      
+      copyToClipboard(template);
+      showAlert('Email template copied to clipboard!', 'success');
+    }
+
+    function showManualEmailInstructions() {
+      const instructions = `
+To contact us manually:
+
+1. Open your email client
+2. Create a new email
+3. Send to: musaliasydney17@gmail.com
+4. Subject: Lost and Found Inquiry
+5. Include your name and message
+
+We'll respond within 24 hours!
+      `.trim();
+      
+      showAlert(instructions, 'info');
+    }
+
+    // Utility Functions
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).catch(() => {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      });
+    }
+
+    function showAlert(message, type) {
+      const existingAlert = document.querySelector('.alert');
+      if (existingAlert) {
+        existingAlert.remove();
+      }
+
+      const alert = document.createElement('div');
+      alert.className = `alert alert-${type}`;
+      alert.textContent = message;
+
+      const formAlerts = document.getElementById('formAlerts');
+      formAlerts.innerHTML = '';
+      formAlerts.appendChild(alert);
+
+      // Auto-remove after 5 seconds
+      setTimeout(() => {
+        alert.remove();
+      }, 5000);
+    }
+
+    function isValidEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      showAlert('💡 Choose your preferred contact method. If email client doesn\'t open, use the alternative options.', 'info');
+    });
+  </script>
+</body>
+</html>
