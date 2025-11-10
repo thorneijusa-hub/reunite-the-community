@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - Lost & Found</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+     * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    main { 
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+       max-width: min(900px, 92vw);
+      margin: clamp(20px, 4vw, 40px) auto;
+       background: white; 
+        padding: clamp(20px, 4vw, 40px); 
+        border-radius: var(--border-radius);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        
+         
+         }
+          h1 {
+      font-size: clamp(1.8rem, 6vw, 2.5rem);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    h2 { margin-top: 1rem;
+       color: #1e293b; 
+      }
+    nav {
+      background:rgba(2, 2, 97, 0.486);
+      padding: 0 clamp(10px, 3vw, 20px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 60px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+     gap: clamp(5px, 2vw, 10px);
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-links {
+      display: flex;
+      text-decoration: none;
+      padding: clamp(10px, 2.5vw, 12px) clamp(15px, 3vw, 20px);
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      font-size: clamp(0.85rem, 3vw, 0.9rem);
+      display: flex;
+      gap: 6px;
+      align-items: center;
+       white-space: nowrap;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .nav-link.active {
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .nav-link::before {
+      font-size: clamp(14px, 3vw, 16px);
+    }
+
+    .nav-link[href="about.html"]::before {
+      content: "ℹ️";
+    }
+
+    .nav-link[href="contact.html"]::before {
+      content: "📧";
+    }
+
+    main h1 {
+      color: var(--text-color);
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      margin-bottom: clamp(15px, 3vw, 20px);
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 10px;
+    }
+    main h2 {
+      margin-top: clamp(20px, 4vw, 30px);
+      margin-bottom: clamp(10px, 2.5vw, 15px);
+      color: var(--text-color);
+      font-size: clamp(1.2rem, 4vw, 1.5rem);
+      position: relative;
+      padding-left: 15px;
+    }
+     main h2::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 70%;
+      background: var(--primary-color);
+      border-radius: 3px;
+    }
+     main p {
+      margin-bottom: clamp(12px, 3vw, 16px);
+      font-size: clamp(0.9rem, 3vw, 1rem);
+      color: var(--text-color);
+    }
+     main ul, main ol {
+      margin: clamp(12px, 3vw, 16px) 0;
+      padding-left: clamp(20px, 4vw, 30px);
+    }
+     main li {
+      margin-bottom: clamp(8px, 2vw, 10px);
+      font-size: clamp(0.9rem, 3vw, 1rem);
+    }
+    main strong {
+      color: var(--primary-color);
+    }
+     main code {
+      background: rgba(2, 2, 97, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+    }
+     .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin: 25px 0;
+    }
+    @media (min-width: 768px) {
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    feature-card {
+      
+      padding: 20px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 4px solid var(--primary-color);
+    }
+     .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    .feature-card h3 {
+      color: var(--primary-color);
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+    .feature-card h3 {
+      color: var(--primary-color);
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+    .feature-card p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+    .mission-box {
+      background: linear-gradient(135deg, rgba(2, 2, 97, 0.1), rgba(102, 126, 234, 0.1));
+      padding: 25px;
+      border-radius: var(--border-radius);
+      margin: 25px 0;
+      border: 1px solid rgba(2, 2, 97, 0.1);
+    }
+     .mission-box p {
+      font-size: clamp(1rem, 3vw, 1.1rem);
+      font-style: italic;
+      text-align: center;
+      margin-bottom: 0;
+    }
+     @media (max-width: 767px) {
+      .nav-container {
+        flex-direction: column;
+        padding: 12px 0;
+        gap: 12px;
+      }
+    }
+      .nav-links {
+        justify-content: center;
+        width: 100%;
+      }
+
+      main {
+        padding: 20px;
+      }
+        .feature-card {
+        padding: 12px;
+      }
+
+      .mission-box {
+        padding: 15px;
+      }
+        .feature-card {
+        padding: 12px;
+      }
+
+      .mission-box {
+        padding: 15px;
+      }
+    * Very small devices */
+   
+    
+    
+
+  </style>
+</head>
+<body >
+  <header>
+    <h1>Lost & Found</h1>
+    
+  </header>
+  <nav>
+    <div class="nav-container">
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="contact .html" class="nav-link">Contact us</a>
+      </div>
+      </div>
+    </nav>
+
+  <main style="background-color: rgba(250, 235, 215, 0.315);">
+    <h1>About This Website</h1>
+    <p>Welcome to the Lost & Found platform — a simple yet powerful way to report, search, and recover lost items within your community. This website was built to solve one of the most common everyday problems: losing things and not knowing how to get them back.</p>
+
+    <h2>Our Mission</h2>
+    <p>Our mission is to create a digital space where honesty and community work together. Whether it’s a lost wallet, a missing pet, or something you’ve just found lying around, this platform makes it easy to connect with the rightful owner or finder.</p>
+
+    <h2>How It Works</h2>
+    <ul>
+      <li><strong>Report an Item:</strong> Users can submit a report by filling out a simple form with details like title, description, location, date, and contact information. An optional photo can also be uploaded.</li>
+      <li><strong>Search and Filter:</strong> The website allows filtering by lost, found, or all items. Users can also search for specific keywords to quickly locate relevant posts.</li>
+      <li><strong>Data Storage:</strong> All submissions are stored locally in your browser using <code>localStorage</code>, meaning your data stays private on your device and loads instantly.</li>
+    </ul>
+
+    <h2>Why This Website is Useful</h2>
+    <p>Traditional notice boards and word-of-mouth announcements are slow and limited. This website provides:</p>
+    <ol>
+      <li><strong>Speed:</strong> Report items in seconds and make them visible immediately.</li>
+      <li><strong>Accessibility:</strong> Available 24/7 from any device with a browser.</li>
+      <li><strong>Community Engagement:</strong> Encourages people to return found items and build trust.</li>
+    </ol>
+
+    <h2>Privacy & Security</h2>
+    <p>Unlike many platforms, this site does not store your information on external servers. All data is saved locally on your own browser, giving you full control. If you clear your browser storage, your posted data will also be erased.</p>
+
+    <h2>Future Improvements</h2>
+    <p>We plan to add more advanced features such as:</p>
+    <ul>
+      <li>User accounts and secure cloud storage.</li>
+      <li>Email notifications when a matching lost/found item is reported.</li>
+      <li>Map-based location tagging to make searching easier.</li>
+    </ul>
+
+    <h2>Contact Us</h2>
+    <p>If you have feedback, feature requests, or suggestions, feel free to reach out through our upcoming contact page or leave a message on our social media platforms.</p>
+  </main>
+</body>
+</html>
