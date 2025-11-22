@@ -364,7 +364,7 @@
   const forgotPasswordForm = document.getElementById('forgotPasswordForm');
   const showRegister = document.getElementById('showRegister');
   const showLogin = document.getElementById('showLogin');
-  const forgotPassword = document.getElementById('forgotPassword');
+  
   const showLoginFromReset = document.getElementById('showLoginFromReset');
   const loginBtn = document.getElementById('loginBtn');
   const registerBtn = document.getElementById('registerBtn');
@@ -383,10 +383,7 @@
     switchForms('login');
   });
 
-  forgotPassword.addEventListener('click', (e) => {
-    e.preventDefault();
-    switchForms('forgotPassword');
-  });
+  
 
   showLoginFromReset.addEventListener('click', (e) => {
     e.preventDefault();
@@ -400,9 +397,8 @@
     
     if (formType === 'register') {
       registerForm.style.display = 'block';
-    } else if (formType === 'forgotPassword') {
-      forgotPasswordForm.style.display = 'block';
-    } else {
+    } 
+     else {
       loginForm.style.display = 'block';
     }
     clearMessages();
@@ -589,43 +585,7 @@
   });
 
   // Forgot password
-  forgotPasswordForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (isSubmitting) return;
-    
-    const email = document.getElementById('resetEmail').value.trim();
-
-    if (!email) {
-      showMessage('Please enter your email address');
-      return;
-    }
-
-    setLoading(resetBtn, true);
-
-    try {
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: window.location.origin + '/update-password.html',
-      });
-
-      if (error) {
-        console.error('Password reset error:', error);
-        showMessage(error.message);
-        return;
-      }
-
-      showMessage('Password reset link sent to your email!', 'success');
-      forgotPasswordForm.reset();
-      
-      setTimeout(() => {
-        switchForms('login');
-      }, 3000);
-    } catch (err) {
-      console.error('Unexpected password reset error:', err);
-      showMessage('An unexpected error occurred. Please try again.');
-    } finally {
-      setLoading(resetBtn, false);
-    }
-  });
+  
 
   // Check if user is already logged in
   document.addEventListener('DOMContentLoaded', async () => {
@@ -664,3 +624,4 @@
 </body>
 
 </html>
+
