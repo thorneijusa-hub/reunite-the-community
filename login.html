@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Login - Lost & Found</title>
+  <style>
+    /* Your existing CSS styles remain the same */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      --primary-color: #2340c2ab;
+      --primary-hover: #1a32a8;
+      --text-color: #333;
+      --text-light: #666;
+      --border-color: #e1e5e9;
+      --background-light: #fafbfc;
+      --success-bg: #d4edda;
+      --success-text: #155724;
+      --error-bg: #f8d7da;
+      --error-text: #721c24;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url(Line-Based%20Visualization%20in%20Blue%20_%20USAP_store.jpeg);
+      background-position: center;
+      background-attachment: fixed;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(15px, 4vw, 20px);
+      line-height: 1.6;
+    }
+
+    .auth-container {
+      width: 100%;
+      max-width: min(420px, 90vw);
+    }
+
+    .auth-box {
+      backdrop-filter: blur(25px);
+      background:#08196e7c;
+      padding: clamp(25px, 6vw, 40px);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .auth-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: clamp(20px, 5vw, 30px);
+    }
+
+    .logo h1 {
+      color: #333;
+      font-size: clamp(1.5rem, 5vw, 1.75rem);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .logo p {
+      color: #666;
+      font-size: clamp(0.8rem, 3vw, 0.875rem);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+       margin-bottom: clamp(20px, 5vw, 30px);
+      font-weight: 600;
+      font-size: clamp(1.25rem, 4.5vw, 1.5rem);
+    }
+
+    .form-group {
+       margin-bottom: clamp(15px, 4vw, 20px);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #555;
+      font-weight: 500;
+      font-size: clamp(0.8rem, 3vw, 0.875rem);
+    }
+
+    input {
+      width: 100%;
+      padding: clamp(12px, 3.5vw, 14px) clamp(14px, 3.5vw, 16px);
+      border: 2px solid #e1e5e9;
+      border-radius: 8px;
+      font-size: clamp(14px, 3.5vw, 15px);
+      transition: all 0.3s ease;
+      background: #fafbfc;
+      font-family: inherit;
+    }
+
+    input:focus {
+      outline: none;
+      
+      background: white;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    input::placeholder {
+      color: #a0a4a8;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: clamp(12px, 3.5vw, 14px);
+      background-color: #2340c2ab;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: clamp(14px, 3.5vw, 16px);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+       min-height: 44px;
+      font-family: inherit;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .form-footer {
+      text-align: center;
+      margin-top: clamp(20px, 5vw, 25px);
+      padding-top: clamp(15px, 4vw, 20px);
+      border-top: 1px solid #e1e5e9;
+    }
+
+    .form-footer p {
+      color: #666;
+       font-size: clamp(0.8rem, 3vw, 0.875rem);
+    }
+
+    .toggle-link {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .toggle-link:hover {
+      color: #764ba2;
+      text-decoration: underline;
+    }
+
+    .alert {
+       padding: clamp(10px, 3vw, 12px) clamp(12px, 3vw, 16px);
+      border-radius: 8px;
+      margin-bottom: clamp(15px, 4vw, 20px);
+      font-size: clamp(0.8rem, 3vw, 0.875rem);
+      text-align: center;
+      animation: slideDown 0.3s ease;
+    }
+
+    .alert-success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .alert-error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .loading {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 360px) {
+      .auth-box {
+        padding: 20px 15px;
+      }
+      
+      .logo h1 {
+        font-size: 1.4rem;
+      }
+      
+      h2 {
+        font-size: 1.2rem;
+      }
+       input {
+        padding: 10px 12px;
+      }
+      
+      .btn-primary {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-box">
+      <div class="logo">
+        <h1>Lost & Found</h1>
+        <p>Reuniting people with their belongings</p>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm">
+        <h2>Welcome Back</h2>
+        
+        <div class="form-group">
+          <label for="loginEmail">Email Address</label>
+          <input 
+            type="email" 
+            id="loginEmail" 
+            placeholder="Enter your email" 
+            required 
+            autocomplete="email"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input 
+            type="password" 
+            id="loginPassword" 
+            placeholder="Enter your password" 
+            required 
+            autocomplete="current-password"
+          >
+        </div>
+
+        <button type="submit" class="btn-primary" id="loginBtn">
+          Sign In
+        </button>
+
+        <div class="form-footer">
+          <p>Don't have an account? <a href="#" class="toggle-link" id="showRegister">Sign up</a></p>
+        </div>
+      </form>
+
+      <!-- Register Form -->
+      <form id="registerForm" style="display: none;">
+        <h2>Create Account</h2>
+        
+        <div class="form-group">
+          <label for="regName">Full Name</label>
+          <input 
+            type="text" 
+            id="regName" 
+            placeholder="Enter your full name" 
+            required 
+            autocomplete="name"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="regEmail">Email Address</label>
+          <input 
+            type="email" 
+            id="regEmail" 
+            placeholder="Enter your email" 
+            required 
+            autocomplete="email"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="regPassword">Password</label>
+          <input 
+            type="password" 
+            id="regPassword" 
+            placeholder="Create a password (min. 6 characters)" 
+            required 
+            autocomplete="new-password"
+          >
+        </div>
+
+        <button type="submit" class="btn-primary" id="registerBtn">
+          Create Account
+        </button>
+
+        <div class="form-footer">
+          <p>Already have an account? <a href="#" class="toggle-link" id="showLogin">Sign in</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  // Initialize Supabase
+  const supabaseUrl = 'https://bbtccnxitrnhvpxfyppf.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJidGNjbnhpdHJuaHZweGZ5cHBmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI2Mjk2MzYsImV4cCI6MjA3ODIwNTYzNn0.G6KRDi_ArLsO-2drE_BVFKqA0B6s0dstpde0PyzaWBE'; 
+  const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+  // Form elements
+  const loginForm = document.getElementById('loginForm');
+  const registerForm = document.getElementById('registerForm');
+  const showRegister = document.getElementById('showRegister');
+  const showLogin = document.getElementById('showLogin');
+  const loginBtn = document.getElementById('loginBtn');
+  const registerBtn = document.getElementById('registerBtn');
+
+  let isSubmitting = false;
+
+  // Toggle between forms
+  showRegister.addEventListener('click', (e) => {
+    e.preventDefault();
+    switchForms('register');
+  });
+
+  showLogin.addEventListener('click', (e) => {
+    e.preventDefault();
+    switchForms('login');
+  });
+
+  function switchForms(formType) {
+    loginForm.style.display = 'none';
+    registerForm.style.display = 'none';
+    
+    if (formType === 'register') {
+      registerForm.style.display = 'block';
+    } else {
+      loginForm.style.display = 'block';
+    }
+    clearMessages();
+  }
+
+  function clearMessages() {
+    const existingAlerts = document.querySelectorAll('.alert');
+    existingAlerts.forEach(alert => alert.remove());
+  }
+
+  function showMessage(message, type = 'error') {
+    clearMessages();
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type}`;
+    alert.textContent = message;
+    
+    const container = document.querySelector('.auth-box');
+    container.insertBefore(alert, container.firstChild.nextSibling);
+    
+    if (type === 'success') {
+      setTimeout(() => alert.remove(), 5000);
+    }
+  }
+
+  function setLoading(button, isLoading) {
+    if (isLoading) {
+      button.innerHTML = '<span class="loading"></span> Processing...';
+      button.disabled = true;
+    } else {
+      if (button.id === 'loginBtn') {
+        button.textContent = 'Sign In';
+      } else if (button.id === 'registerBtn') {
+        button.textContent = 'Create Account';
+      }
+      button.disabled = false;
+    }
+    isSubmitting = isLoading;
+  }
+
+  // Login user with Supabase
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (isSubmitting) return;
+    
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
+
+    if (!email || !password) {
+      showMessage('Please fill in all fields');
+      return;
+    }
+
+    setLoading(loginBtn, true);
+
+    try {
+      console.log('Attempting login for:', email);
+      
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+      if (error) {
+        console.error('Login error:', error);
+        
+        // Specific error messages
+        if (error.message.includes('Invalid login credentials')) {
+          showMessage('Invalid email or password');
+        } else if (error.message.includes('Email not confirmed')) {
+          showMessage('Please verify your email address first');
+        } else {
+          showMessage(error.message);
+        }
+        return;
+      }
+
+      if (data.user) {
+        console.log('Login successful:', data.user.email);
+        showMessage('Login successful! Redirecting...', 'success');
+        
+        // Store user data
+        localStorage.setItem('user', JSON.stringify(data.user));
+        localStorage.setItem('session', JSON.stringify(data.session));
+        
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1500);
+      }
+    } catch (err) {
+      console.error('Unexpected login error:', err);
+      showMessage('An unexpected error occurred. Please try again.');
+    } finally {
+      setLoading(loginBtn, false);
+    }
+  });
+
+  // Register user with Supabase
+  registerForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (isSubmitting) return;
+    
+    const fullName = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const password = document.getElementById('regPassword').value.trim();
+
+    if (!fullName || !email || !password) {
+      showMessage('Please fill in all fields');
+      return;
+    }
+
+    if (password.length < 6) {
+      showMessage('Password must be at least 6 characters long');
+      return;
+    }
+
+    setLoading(registerBtn, true);
+
+    try {
+      console.log('Attempting registration for:', email);
+      
+      const { data, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+          data: {
+            full_name: fullName,
+          }
+        }
+      });
+
+      if (error) {
+        console.error('Registration error:', error);
+        
+        // Specific error messages
+        if (error.message.includes('User already registered')) {
+          showMessage('An account with this email already exists');
+        } else if (error.message.includes('Password should be at least')) {
+          showMessage('Password must be at least 6 characters long');
+        } else {
+          showMessage(error.message);
+        }
+        return;
+      }
+
+      if (data.user) {
+        console.log('Registration successful:', data.user.id);
+        
+        if (data.user.identities && data.user.identities.length === 0) {
+          showMessage('An account with this email already exists. Please sign in instead.');
+        } else {
+          showMessage('Registration successful! Please check your email for verification.', 'success');
+          registerForm.reset();
+          
+          setTimeout(() => {
+            switchForms('login');
+          }, 3000);
+        }
+      }
+    } catch (err) {
+      console.error('Unexpected registration error:', err);
+      showMessage('An unexpected error occurred. Please try again.');
+    } finally {
+      setLoading(registerBtn, false);
+    }
+  });
+
+  // Check if user is already logged in
+  document.addEventListener('DOMContentLoaded', async () => {
+    console.log('Page loaded, checking authentication...');
+    
+    try {
+      // Simple session check without throwing errors
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (session) {
+        console.log('User already logged in, redirecting...');
+        window.location.href = 'index.html';
+      } else {
+        console.log('No active session - user needs to login');
+      }
+    } catch (error) {
+      console.log('No active session (this is normal for login page)');
+    }
+  });
+
+  // Listen for auth state changes
+  supabase.auth.onAuthStateChange((event, session) => {
+    console.log('Auth state change:', event);
+    
+    if (event === 'SIGNED_IN' && session) {
+      console.log('User signed in:', session.user.email);
+    } else if (event === 'SIGNED_OUT') {
+      console.log('User signed out');
+      localStorage.removeItem('user');
+      localStorage.removeItem('session');
+    } else if (event === 'INITIAL_SESSION') {
+      console.log('Initial session loaded');
+    }
+  });
+</script>
+</body>
+</html>
