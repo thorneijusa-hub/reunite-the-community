@@ -361,7 +361,7 @@
   // Form elements
   const loginForm = document.getElementById('loginForm');
   const registerForm = document.getElementById('registerForm');
-  const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+  
   const showRegister = document.getElementById('showRegister');
   const showLogin = document.getElementById('showLogin');
   
@@ -393,7 +393,7 @@
   function switchForms(formType) {
     loginForm.style.display = 'none';
     registerForm.style.display = 'none';
-    forgotPasswordForm.style.display = 'none';
+    
     
     if (formType === 'register') {
       registerForm.style.display = 'block';
@@ -624,4 +624,5 @@
 </body>
 
 </html>
+
 
